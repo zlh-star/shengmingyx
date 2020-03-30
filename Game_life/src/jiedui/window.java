@@ -90,7 +90,56 @@ public class window {
         win.setVisible(true);
 	}
 
-	class myThread extends Thread{
+
+	class start implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (pattern==1) {
+                star.init_data.Init();
+            }
+
+            star.set_color.paint();
+
+            xibao = 0;
+            step = 0;
+            end = true;
+ 
+            if (thread != null)  
+                thread.stop();  
+            thread = new myThread();  
+            thread.start();  
+        }
+    }
+	
+	 class continue_one implements ActionListener
+     {
+
+         @Override
+         public void actionPerformed(ActionEvent e) {
+ 
+             if(thread!=null)
+                 thread.stop();
+             thread = new myThread();
+             thread.start();
+         }
+         
+     }
+	 
+	 class stop implements ActionListener
+     {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+
+             if (thread != null)  
+                 thread.stop();  
+             thread = null;  
+         }
+         
+     }
+
+        class myThread extends Thread{
         public myThread()    {    
         }
         public void run(){
@@ -101,7 +150,7 @@ public class window {
                 try {
                     sleep(speed);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
+                  
                     e.printStackTrace();
                 }
                 
@@ -115,68 +164,18 @@ public class window {
                     }
                 }
                 step++;
-                number.setText("Number of remaining lives: "+xibao+"               ");
+                number.setText("The Nunber of cell: "+xibao+"               ");
                 st.setText("step: "+step);
                 
                 star.set_color.paint();
                 
                 if (xibao==0) {
                     end = false;
-                    JOptionPane.showMessageDialog(null, "生命演化结束：\n"
+                    JOptionPane.showMessageDialog(null, "细胞生命结束：\n"
                             + "        所用步数为"+step);
                 }
                 
             }
         }
     }
-
-	class start implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            //初始化逻辑地图
-            if (pattern==1) {
-                star.init_data.Init();
-            }
-            //更新地图颜色
-            star.set_color.paint();
-            //初始化步数和剩余生命个数
-            xibao = 0;
-            step = 0;
-            end = true;
-            //控制线程的开断
-            if (thread != null)  
-                thread.stop();  
-            thread = new myThread();  
-            thread.start();  
-        }
-    }
-	
-	 class continue_one implements ActionListener
-     {
-
-         @Override
-         public void actionPerformed(ActionEvent e) {
-             // TODO Auto-generated method stub
-             if(thread!=null)
-                 thread.stop();
-             thread = new myThread();
-             thread.start();
-         }
-         
-     }
-	 
-	 class stop implements ActionListener
-     {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-             // TODO Auto-generated method stub
-             //控制线程的开断
-             if (thread != null)  
-                 thread.stop();  
-             thread = null;  
-         }
-         
-     }
 }
