@@ -12,7 +12,7 @@ public class suanfa {
         jPanel = jpanel_one;
     }
     
-    //中心生命的状态并更新
+ 
     public void judge() {
     int life = 0;
         for (int i = 1; i < state_one.length - 1; i++) {
