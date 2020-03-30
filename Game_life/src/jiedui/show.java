@@ -11,7 +11,7 @@ public class show {
         state_one = state;
         jPanel = jpanel_one;
     }
-    //设置颜色
+    //设置各种颜色
     public static void paint()
     {
             
