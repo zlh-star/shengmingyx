@@ -25,7 +25,7 @@ import java.awt.FlowLayout;
 
 public class window {
 	JFrame win;
-	static int speed = 1500;
+	static int speed = 15;
 	static int xibao = 0;
 	static int step = 0;
 	static JPanel[][] jPanel;
