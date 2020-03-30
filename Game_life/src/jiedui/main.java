@@ -24,29 +24,28 @@ import javax.swing.JOptionPane;
 
 public class main extends Thread {
 	static main start;
-    static xibaozt init_data;
-    static suanfa judge;
-    static show set_color;
-    static window frame;
-    //存放细胞状态
+    static xibaozt cs;
+    static suanfa jud;
+    static show ld;
+    static window wind;
     static boolean[][] state_one;
     static JPanel[][] jPanel;
-    //初始化GUI界面
+
     public main(int row,int col)
     {
         state_one = new boolean[row][col];
-        frame = new window(row,col);
-        jPanel = frame.jPanel;
+        wind = new window(row,col);
+        jPanel = wind.jPanel;
     }
     
-    //主函数
+    //初始函数
     public static void main(String[] args)
     {
-        //创建游戏对象
+
             start = new main(30,30);
-            init_data = new xibaozt(state_one);
-            judge = new suanfa(state_one, jPanel);
-            set_color = new show(state_one, jPanel);
+            cs = new xibaozt(state_one);
+            jud = new suanfa(state_one, jPanel);
+            ld = new show(state_one, jPanel);
     }
 }
 

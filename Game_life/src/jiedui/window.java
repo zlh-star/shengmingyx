@@ -71,7 +71,6 @@ public class window {
         win.setSize(600, 600); 
         JMenuBar menuBar = new JMenuBar();
         win.setJMenuBar(menuBar);
-        //游戏按钮
         JMenu choice = new JMenu("game");
         menuBar.add(choice);
         
@@ -90,22 +89,60 @@ public class window {
         win.setVisible(true);
 	}
 
+	class myThread extends Thread{
+        public myThread()    {    
+        }
+        public void run(){
+            while(end)
+            {
+                xibao = 0;
+                star.jud.judge();
+                try {
+                    sleep(speed);
+                } catch (InterruptedException e) {
+                  
+                    e.printStackTrace();
+                }
+                
+                for (int m = 1; m < star.state_one.length - 1; m++)
+                {
+                    for (int n = 1; n < star.state_one[m].length - 1; n++) 
+                    {
+                        if (star.state_one[m][n]==true) {
+                            xibao ++;
+                        }
+                    }
+                }
+                step++;
+                number.setText("Number of remaining lives: "+xibao+"               ");
+                st.setText("step: "+step);
+                
+                star.ld.paint();
+                
+                if (xibao==0) {
+                    end = false;
+                    JOptionPane.showMessageDialog(null, "生命演化结束：\n"
+                            + "        所用步数为"+step);
+                }
+                
+            }
+        }
+    }
 
 	class start implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+         
             if (pattern==1) {
-                star.init_data.Init();
+                star.cs.Init();
             }
-
-            star.set_color.paint();
-
+         
+            star.ld.paint();
             xibao = 0;
             step = 0;
             end = true;
- 
+
             if (thread != null)  
                 thread.stop();  
             thread = new myThread();  
@@ -118,7 +155,7 @@ public class window {
 
          @Override
          public void actionPerformed(ActionEvent e) {
- 
+
              if(thread!=null)
                  thread.stop();
              thread = new myThread();
@@ -138,44 +175,4 @@ public class window {
          }
          
      }
-
-        class myThread extends Thread{
-        public myThread()    {    
-        }
-        public void run(){
-            while(end)
-            {
-                xibao = 0;
-                star.judge.judge();
-                try {
-                    sleep(speed);
-                } catch (InterruptedException e) {
-                  
-                    e.printStackTrace();
-                }
-                
-                for (int m = 1; m < star.state_one.length - 1; m++)
-                {
-                    for (int n = 1; n < star.state_one[m].length - 1; n++) 
-                    {
-                        if (star.state_one[m][n]==true) {
-                            xibao ++;
-                        }
-                    }
-                }
-                step++;
-                number.setText("The Nunber of cell: "+xibao+"               ");
-                st.setText("step: "+step);
-                
-                star.set_color.paint();
-                
-                if (xibao==0) {
-                    end = false;
-                    JOptionPane.showMessageDialog(null, "细胞生命结束：\n"
-                            + "        所用步数为"+step);
-                }
-                
-            }
-        }
-    }
 }
