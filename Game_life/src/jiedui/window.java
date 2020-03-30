@@ -121,8 +121,8 @@ public class window {
                 
                 if (xibao==0) {
                     end = false;
-                    JOptionPane.showMessageDialog(null, "生命演化结束：\n"
-                            + "        所用步数为"+step);
+                    JOptionPane.showMessageDialog(null, "演化结束：\n"
+                            + "        共用步数为"+step);
                 }
                 
             }
